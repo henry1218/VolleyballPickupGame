@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
 
@@ -40,7 +41,14 @@ dependencies {
     implementation(Config.AndroidX.appCompat)
     implementation(Config.AndroidX.constraintLayout)
     implementation(Config.Libs.material)
+    implementation(Config.Libs.hilt)
+    kapt(Config.Libs.hiltCompiler)
+
     testImplementation(Config.Test.jUnit)
     androidTestImplementation(Config.Test.jUnitExt)
     androidTestImplementation(Config.Test.espresso)
+}
+
+kapt {
+    correctErrorTypes = true
 }
