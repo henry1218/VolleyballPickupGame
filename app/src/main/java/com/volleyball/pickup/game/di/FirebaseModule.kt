@@ -1,4 +1,4 @@
-package com.volleyball.pickup.game
+package com.volleyball.pickup.game.di
 
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.volleyball.pickup.game
+package com.volleyball.pickup.game.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.material.snackbar.Snackbar
+import com.volleyball.pickup.game.MainActivity
 import com.volleyball.pickup.game.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 

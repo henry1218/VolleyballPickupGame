@@ -23,7 +23,7 @@
         tools:targetApi="32">
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashActivityStyle">
             <intent-filter>
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

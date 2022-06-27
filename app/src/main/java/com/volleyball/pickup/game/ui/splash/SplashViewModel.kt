@@ -1,7 +1,8 @@
-package com.volleyball.pickup.game
+package com.volleyball.pickup.game.ui.splash
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.volleyball.pickup.game.repo.SplashRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

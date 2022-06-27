@@ -1,10 +1,12 @@
-package com.volleyball.pickup.game
+package com.volleyball.pickup.game.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.volleyball.pickup.game.MainActivity
+import com.volleyball.pickup.game.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")

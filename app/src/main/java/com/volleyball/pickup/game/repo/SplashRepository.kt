@@ -1,4 +1,4 @@
-package com.volleyball.pickup.game
+package com.volleyball.pickup.game.repo
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
