@@ -1,9 +1,11 @@
 buildscript {
     repositories {
         mavenCentral()
+        google()
     }
     dependencies {
         classpath(Config.Libs.hiltPlugin)
+        classpath(Config.Libs.googleServices)
     }
 }
 

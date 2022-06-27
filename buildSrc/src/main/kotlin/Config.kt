@@ -18,13 +18,26 @@ object Config {
         const val core = "androidx.core:core-ktx:1.8.0"
         const val appCompat = "androidx.appcompat:appcompat:1.4.2"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+        const val activity = "androidx.activity:activity-ktx:1.3.1"
     }
 
     object Libs {
         const val material = "com.google.android.material:material:1.6.1"
-        const val hilt = "com.google.dagger:hilt-android:2.38.1"
-        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:2.38.1"
-        const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.38.1"
+        const val hilt = "com.google.dagger:hilt-android:2.42"
+        const val hiltCompiler = "com.google.dagger:hilt-compiler:2.42"
+        const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:2.42"
+        const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.42"
+        const val googleServices = "com.google.gms:google-services:4.3.12"
+
+        object LifeCycle {
+            const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+        }
+
+        object Firebase {
+            const val auth = "com.google.firebase:firebase-auth-ktx:21.0.6"
+        }
     }
 
     object Test {

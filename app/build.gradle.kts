@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,9 +41,15 @@ dependencies {
     implementation(Config.AndroidX.core)
     implementation(Config.AndroidX.appCompat)
     implementation(Config.AndroidX.constraintLayout)
+    implementation(Config.AndroidX.activity)
     implementation(Config.Libs.material)
     implementation(Config.Libs.hilt)
     kapt(Config.Libs.hiltCompiler)
+    kapt(Config.Libs.hiltAndroidCompiler)
+    implementation(Config.Libs.LifeCycle.liveData)
+    implementation(Config.Libs.LifeCycle.viewModel)
+    implementation(Config.Libs.LifeCycle.runtime)
+    implementation(Config.Libs.Firebase.auth)
 
     testImplementation(Config.Test.jUnit)
     androidTestImplementation(Config.Test.jUnitExt)
