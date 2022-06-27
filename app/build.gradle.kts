@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -50,6 +53,8 @@ dependencies {
     implementation(Config.Libs.LifeCycle.viewModel)
     implementation(Config.Libs.LifeCycle.runtime)
     implementation(Config.Libs.Firebase.auth)
+    implementation(Config.Libs.Facebook.sdk)
+    implementation(Config.Libs.Facebook.login)
 
     testImplementation(Config.Test.jUnit)
     androidTestImplementation(Config.Test.jUnitExt)

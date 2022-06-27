@@ -38,6 +38,11 @@ object Config {
         object Firebase {
             const val auth = "com.google.firebase:firebase-auth-ktx:21.0.6"
         }
+
+        object Facebook {
+            const val sdk = "com.facebook.android:facebook-android-sdk:13.2.0"
+            const val login = "com.facebook.android:facebook-login:13.2.0"
+        }
     }
 
     object Test {
