@@ -42,7 +42,9 @@ object Config {
         const val timber = "com.jakewharton.timber:timber:5.0.1"
 
         object Firebase {
-            const val auth = "com.google.firebase:firebase-auth-ktx:21.0.6"
+            const val bom = "com.google.firebase:firebase-bom:30.0.2"
+            const val auth = "com.google.firebase:firebase-auth-ktx"
+            const val firestore = "com.google.firebase:firebase-firestore-ktx"
         }
 
         object Facebook {

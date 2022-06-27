@@ -13,12 +13,21 @@
     <fragment
         android:id="@+id/navigation_events"
         android:name="com.volleyball.pickup.game.ui.events.EventsFragment"
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/fragment_events">
+        <action
+            android:id="@+id/action_create_post"
+            app:destination="@id/navigation_create_event" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.volleyball.pickup.game.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_create_event"
+        android:name="com.volleyball.pickup.game.ui.events.CreateEventFragment"
+        tools:layout="@layout/fragment_create_event" />
 
 </navigation>
 

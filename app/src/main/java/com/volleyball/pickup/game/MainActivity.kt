@@ -2,6 +2,7 @@ package com.volleyball.pickup.game
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -46,8 +47,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         accessTokenTracker.startTracking()
+
+        viewModel.bottomNavVisible.observe(this) {
+            binding.bottomNavView.visibility = if (it) View.VISIBLE else View.GONE
+        }
     }
 
     override fun onDestroy() {
