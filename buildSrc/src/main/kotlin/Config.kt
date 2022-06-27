@@ -1,5 +1,5 @@
 object Config {
-    const val kotlin = "1.7.0"
+    const val kotlin = "1.6.21"
     const val androidGradle = "7.3.0-beta04"
 
     object Android {
@@ -48,6 +48,21 @@ object Config {
             const val sdk = "com.facebook.android:facebook-android-sdk:13.2.0"
             const val login = "com.facebook.android:facebook-login:13.2.0"
         }
+    }
+
+    object Compose {
+        const val runtime = "androidx.compose.runtime:runtime:1.2.0-rc02"
+        const val ui = "androidx.compose.ui:ui:1.2.0-rc02"
+        const val foundation = "androidx.compose.foundation:foundation:1.2.0-rc02"
+        const val foundationLayout = "androidx.compose.foundation:foundation-layout:1.2.0-rc02"
+        const val material = "androidx.compose.material:material:1.2.0-rc02"
+        const val liveData = "androidx.compose.runtime:runtime-livedata:1.2.0-rc02"
+        const val uiTool = "androidx.compose.ui:ui-tooling:1.2.0-rc02"
+        const val themeAdapter = "com.google.android.material:compose-theme-adapter:1.1.11"
+        const val uiToolPreview = "androidx.compose.ui:ui-tooling-preview:1.1.1"
+        const val activity = "androidx.activity:activity-compose:1.4.0"
+        const val coil = "io.coil-kt:coil-compose:2.1.0"
+        const val kotlinCompilerExtensionVersion = "1.2.0-beta03"
     }
 
     object Test {

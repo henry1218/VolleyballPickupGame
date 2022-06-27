@@ -29,14 +29,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Config.Compose.kotlinCompilerExtensionVersion
     }
 }
 
@@ -57,6 +61,17 @@ dependencies {
     implementation(Config.Libs.Facebook.login)
     implementation(Config.AndroidX.Navigation.fragment)
     implementation(Config.AndroidX.Navigation.ktx)
+    implementation(Config.Compose.runtime)
+    implementation(Config.Compose.ui)
+    implementation(Config.Compose.foundation)
+    implementation(Config.Compose.foundationLayout)
+    implementation(Config.Compose.material)
+    implementation(Config.Compose.liveData)
+    implementation(Config.Compose.uiTool)
+    implementation(Config.Compose.themeAdapter)
+    implementation(Config.Compose.uiToolPreview)
+    implementation(Config.Compose.activity)
+    implementation(Config.Compose.coil)
 
     testImplementation(Config.Test.jUnit)
     androidTestImplementation(Config.Test.jUnitExt)
