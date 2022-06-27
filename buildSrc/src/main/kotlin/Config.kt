@@ -39,6 +39,7 @@ object Config {
         const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:2.42"
         const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.42"
         const val googleServices = "com.google.gms:google-services:4.3.12"
+        const val timber = "com.jakewharton.timber:timber:5.0.1"
 
         object Firebase {
             const val auth = "com.google.firebase:firebase-auth-ktx:21.0.6"

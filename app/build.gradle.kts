@@ -72,6 +72,7 @@ dependencies {
     implementation(Config.Compose.uiToolPreview)
     implementation(Config.Compose.activity)
     implementation(Config.Compose.coil)
+    implementation(Config.Libs.timber)
 
     testImplementation(Config.Test.jUnit)
     androidTestImplementation(Config.Test.jUnitExt)

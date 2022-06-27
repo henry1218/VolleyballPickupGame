@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.fragment.app.Fragment
 import com.facebook.Profile
+import com.facebook.login.LoginManager
 import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.FragmentProfileBinding
 import com.volleyball.pickup.game.ui.widgets.AvatarView
@@ -26,6 +27,9 @@ class ProfileFragment : Fragment() {
             }
         }
         binding.tvName.text = Profile.getCurrentProfile()?.let { "${it.firstName} ${it.lastName}" }
+        binding.btnLogout.setOnClickListener {
+            LoginManager.getInstance().logOut()
+        }
 
         return binding.root
     }
