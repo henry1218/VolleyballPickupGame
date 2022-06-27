@@ -19,6 +19,17 @@ object Config {
         const val appCompat = "androidx.appcompat:appcompat:1.4.2"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
         const val activity = "androidx.activity:activity-ktx:1.3.1"
+
+        object Navigation {
+            const val fragment = "androidx.navigation:navigation-fragment-ktx:2.4.2"
+            const val ktx = "androidx.navigation:navigation-ui-ktx:2.4.2"
+        }
+
+        object LifeCycle {
+            const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+        }
     }
 
     object Libs {
@@ -28,12 +39,6 @@ object Config {
         const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:2.42"
         const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.42"
         const val googleServices = "com.google.gms:google-services:4.3.12"
-
-        object LifeCycle {
-            const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
-            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
-            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
-        }
 
         object Firebase {
             const val auth = "com.google.firebase:firebase-auth-ktx:21.0.6"
