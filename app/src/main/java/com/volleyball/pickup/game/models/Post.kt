@@ -19,5 +19,6 @@ data class Post(
     val needBoth: Int = 0,
     val additionalInfo: String = "",
     val profilePic: String = "",
-    val players: List<String> = listOf()
+    val players: List<String> = listOf(),
+    val hostName: String = ""
 )

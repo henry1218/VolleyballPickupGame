@@ -21,13 +21,11 @@ import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.FragmentCreateEventBinding
 import com.volleyball.pickup.game.models.Post
-import com.volleyball.pickup.game.utils.CityUtil
-import com.volleyball.pickup.game.utils.NET_HEIGHT_BETWEEN
-import com.volleyball.pickup.game.utils.NET_HEIGHT_MAN
-import com.volleyball.pickup.game.utils.NET_HEIGHT_WOMAN
+import com.volleyball.pickup.game.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateEventFragment : Fragment() {
@@ -41,6 +39,9 @@ class CreateEventFragment : Fragment() {
     private var endTime: Calendar? = null
     private var netHeightId = NET_HEIGHT_MAN
     private lateinit var globalLayoutListener: ViewTreeObserver.OnGlobalLayoutListener
+
+    @Inject
+    lateinit var profileUtils: ProfileUtils
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,7 +100,8 @@ class CreateEventFragment : Fragment() {
                             needWomen = numberFormat(binding.playerWomanAmount),
                             needBoth = numberFormat(binding.playerBothAmount),
                             additionalInfo = binding.additional.text.toString(),
-                            profilePic = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                            profilePic = profileUtils.getSmallProfilePic(),
+                            hostName = profileUtils.getName()
                         )
                     )
                     findNavController().popBackStack()

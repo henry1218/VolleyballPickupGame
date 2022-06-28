@@ -1,6 +1,5 @@
 package com.volleyball.pickup.game.ui.widgets
 
-import android.net.Uri
 import androidx.annotation.DimenRes
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -15,7 +14,7 @@ import coil.request.ImageRequest
 
 @Composable
 fun AvatarView(
-    uri: Uri? = null,
+    uri: String,
     @DimenRes dimenRes: Int,
 ) {
     AsyncImage(

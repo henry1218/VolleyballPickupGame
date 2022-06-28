@@ -13,6 +13,15 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private val _bottomNavVisible = MutableLiveData(true)
     val bottomNavVisible: LiveData<Boolean> = _bottomNavVisible
 
+    private val _postList = MutableLiveData<List<Post>>()
+    val postList: LiveData<List<Post>> = _postList
+
+    fun fetchPosts() {
+        if (_postList.value == null) {
+            repository.fetchPosts(_postList)
+        }
+    }
+
     fun setBottomNavVisible(visible: Boolean) {
         _bottomNavVisible.value = visible
     }
