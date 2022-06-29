@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.volleyball.pickup.game.models.Address
 import com.volleyball.pickup.game.models.Post
+import com.volleyball.pickup.game.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,6 +20,9 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private val _hostEventList = MutableLiveData<List<Post>>()
     val hostEventList: LiveData<List<Post>> = _hostEventList
 
+    private val _postDetail = SingleLiveEvent<Post>()
+    val postDetail: SingleLiveEvent<Post> = _postDetail
+
     fun fetchPosts() {
         if (_postList.value == null) {
             repository.fetchPosts(_postList)
@@ -29,6 +33,10 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         if (_hostEventList.value == null) {
             repository.fetchHostEvents(_hostEventList)
         }
+    }
+
+    fun fetchPostDetail(postId: String) {
+        repository.fetchPostDetail(postId, _postDetail)
     }
 
     fun setBottomNavVisible(visible: Boolean) {
@@ -45,5 +53,9 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
     fun signOut() {
         repository.signOut()
+    }
+
+    fun removeRegistration() {
+        repository.removeRegistration()
     }
 }

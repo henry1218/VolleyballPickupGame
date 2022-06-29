@@ -8,7 +8,16 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.volleyball.pickup.game.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_post_detail"
+            app:destination="@id/navigation_post_detail">
+            <argument
+                android:name="postId"
+                android:defaultValue=""
+                app:argType="string" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_events"
@@ -28,6 +37,16 @@
         android:id="@+id/navigation_create_event"
         android:name="com.volleyball.pickup.game.ui.events.CreateEventFragment"
         tools:layout="@layout/fragment_create_event" />
+
+    <fragment
+        android:id="@+id/navigation_post_detail"
+        android:name="com.volleyball.pickup.game.ui.post.PostDetailFragment"
+        tools:layout="@layout/fragment_post_detail" >
+        <argument
+            android:name="postId"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 
 </navigation>
 

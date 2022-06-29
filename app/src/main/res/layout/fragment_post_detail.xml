@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleCentered="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/cv_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_height="50dp"
+                tools:layout_width="50dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/host_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintBottom_toBottomOf="@id/cv_avatar"
+                app:layout_constraintStart_toEndOf="@id/cv_avatar"
+                app:layout_constraintTop_toTopOf="@id/cv_avatar"
+                tools:text="Host Name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_avatar"
+                tools:text="徵臨打1位" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/going"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="已報名1位" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintStart_toEndOf="@+id/going"
+                app:layout_constraintTop_toTopOf="@id/going"
+                tools:text="缺2位" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/going"
+                tools:text="新北市新莊區 國民運動中心2F" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/date_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/location"
+                tools:text="2022/09/09 週一 15:00 ~ 16:00" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/net_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/ic_height"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/date_time"
+                tools:text="男網" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/ic_ticket"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/net_height"
+                tools:text="$120" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/additional_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="top"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fee"
+                tools:text="additional info"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

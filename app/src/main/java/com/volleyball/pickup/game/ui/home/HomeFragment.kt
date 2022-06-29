@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.databinding.FragmentHomeBinding
@@ -25,7 +26,8 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val adapter = PostAdapter(PostViewType.HOME, ({ postId ->
-            // TODO item click
+            val action = HomeFragmentDirections.actionPostDetail(postId)
+            findNavController().navigate(action)
         }))
         binding.postView.adapter = adapter
         binding.postView.setHasFixedSize(true)

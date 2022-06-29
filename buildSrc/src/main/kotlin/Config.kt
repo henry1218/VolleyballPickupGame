@@ -24,6 +24,7 @@ object Config {
         object Navigation {
             const val fragment = "androidx.navigation:navigation-fragment-ktx:2.4.2"
             const val ktx = "androidx.navigation:navigation-ui-ktx:2.4.2"
+            const val safeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2"
         }
 
         object LifeCycle {

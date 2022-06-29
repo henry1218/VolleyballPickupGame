@@ -6,6 +6,7 @@ buildscript {
     dependencies {
         classpath(Config.Libs.hiltPlugin)
         classpath(Config.Libs.googleServices)
+        classpath(Config.AndroidX.Navigation.safeArgsPlugin)
     }
 }
 
