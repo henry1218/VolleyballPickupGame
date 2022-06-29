@@ -75,6 +75,7 @@ dependencies {
     implementation(Config.Compose.activity)
     implementation(Config.Compose.coil)
     implementation(Config.Libs.timber)
+    implementation(Config.AndroidX.viewpager2)
 
     testImplementation(Config.Test.jUnit)
     androidTestImplementation(Config.Test.jUnitExt)

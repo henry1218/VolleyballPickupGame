@@ -19,6 +19,7 @@ object Config {
         const val appCompat = "androidx.appcompat:appcompat:1.4.2"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
         const val activity = "androidx.activity:activity-ktx:1.3.1"
+        const val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
 
         object Navigation {
             const val fragment = "androidx.navigation:navigation-fragment-ktx:2.4.2"

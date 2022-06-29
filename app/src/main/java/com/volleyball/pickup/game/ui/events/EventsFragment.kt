@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.FragmentEventsBinding
@@ -22,11 +26,21 @@ class EventsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentEventsBinding.inflate(inflater, container, false)
         binding.fabCreateEvent.setOnClickListener {
             findNavController().navigate(R.id.action_create_post)
         }
+
+        val pageAdapter = PageAdapter(childFragmentManager, lifecycle)
+        binding.viewpager.adapter = pageAdapter
+        binding.viewpager.isUserInputEnabled = false
+        TabLayoutMediator(binding.tabLayout, binding.viewpager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "已報名揪團"
+                1 -> tab.text = "我的揪團"
+            }
+        }.attach()
 
         return binding.root
     }
@@ -34,5 +48,22 @@ class EventsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    class PageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+        FragmentStateAdapter(fragmentManager, lifecycle) {
+
+        private var fragments: ArrayList<Fragment> = arrayListOf(
+            MyAttendEventsFragment(),
+            MyHostEventsFragment(),
+        )
+
+        override fun getItemCount(): Int {
+            return fragments.size
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            return fragments[position]
+        }
     }
 }
