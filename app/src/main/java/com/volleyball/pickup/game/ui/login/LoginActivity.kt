@@ -2,7 +2,6 @@ package com.volleyball.pickup.game.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.CallbackManager
@@ -14,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.volleyball.pickup.game.MainActivity
 import com.volleyball.pickup.game.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -38,8 +38,14 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     override fun onError(error: FacebookException) {
-                        val snack = Snackbar.make(this@apply, "登入錯誤", Snackbar.LENGTH_LONG)
-                        Log.e("Henry", error.message.toString())
+                        val snack = Snackbar.make(
+                            this@apply,
+                            error.message.toString()
+                                .substringAfter("[message]: ")
+                                .substringBefore("[extra]"),
+                            Snackbar.LENGTH_LONG
+                        )
+                        Timber.e("facebook login error(${error.message})")
                         snack.show()
                     }
 
@@ -55,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
-                val snack = Snackbar.make(binding.root, "登入失敗", Snackbar.LENGTH_LONG)
+                val snack = Snackbar.make(binding.root, "登入失敗，請再試一次", Snackbar.LENGTH_LONG)
                 snack.show()
             }
         }
