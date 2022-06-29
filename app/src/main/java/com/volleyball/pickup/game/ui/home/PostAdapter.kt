@@ -11,12 +11,14 @@ import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.PostViewHolderItemBinding
 import com.volleyball.pickup.game.models.Post
 import com.volleyball.pickup.game.ui.widgets.AvatarView
-import com.volleyball.pickup.game.utils.NET_HEIGHT_MAN
-import com.volleyball.pickup.game.utils.NET_HEIGHT_WOMAN
+import com.volleyball.pickup.game.utils.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PostAdapter(val itemClick: (id: String) -> Unit) :
+class PostAdapter(
+    private val viewType: PostViewType,
+    val itemClick: ((id: String) -> Unit)? = null
+) :
     ListAdapter<Post, RecyclerView.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -37,12 +39,23 @@ class PostAdapter(val itemClick: (id: String) -> Unit) :
 
         fun onBind(post: Post) {
             post.apply {
-                binding.cvAvatar.setContent {
-                    MaterialTheme {
-                        AvatarView(profilePic, R.dimen.post_avatar_size)
+                when (viewType) {
+                    PostViewType.HOME -> {
+                        binding.cvAvatar.setContent {
+                            MaterialTheme {
+                                AvatarView(profilePic, R.dimen.post_avatar_size)
+                            }
+                        }
+                        binding.hostName.text = hostName
+                    }
+                    PostViewType.MY_HOST -> {
+                        binding.cvAvatar.gone()
+                        binding.hostName.gone()
+                        binding.additionalInfo.visible()
+                        binding.additionalInfo.text = "其他注意事項:\n$additionalInfo"
                     }
                 }
-                binding.hostName.text = hostName
+
                 binding.title.text = title
                 binding.going.text = ("已報名${players.size}位")
                 val left = if (needBoth > 0) needBoth else needMen + needWomen
@@ -61,7 +74,7 @@ class PostAdapter(val itemClick: (id: String) -> Unit) :
             }
 
             itemView.setOnClickListener {
-                itemClick(post.postId)
+                itemClick?.invoke(post.postId)
             }
         }
     }

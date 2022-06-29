@@ -4,6 +4,7 @@ import com.google.firebase.Timestamp
 
 data class Post(
     var postId: String = "",
+    var hostUid: String = "",
     val title: String = "",
     val date: String = "",
     val startTime: String = "",

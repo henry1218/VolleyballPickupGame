@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.databinding.FragmentHomeBinding
+import com.volleyball.pickup.game.utils.PostViewType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +24,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val adapter = PostAdapter(({ postId ->
+        val adapter = PostAdapter(PostViewType.HOME, ({ postId ->
             // TODO item click
         }))
         binding.postView.adapter = adapter

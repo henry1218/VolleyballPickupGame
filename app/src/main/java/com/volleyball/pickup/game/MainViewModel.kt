@@ -16,9 +16,18 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private val _postList = MutableLiveData<List<Post>>()
     val postList: LiveData<List<Post>> = _postList
 
+    private val _hostEventList = MutableLiveData<List<Post>>()
+    val hostEventList: LiveData<List<Post>> = _hostEventList
+
     fun fetchPosts() {
         if (_postList.value == null) {
             repository.fetchPosts(_postList)
+        }
+    }
+
+    fun fetchHostEvent() {
+        if (_hostEventList.value == null) {
+            repository.fetchHostEvents(_hostEventList)
         }
     }
 

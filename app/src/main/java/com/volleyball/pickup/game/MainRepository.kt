@@ -11,7 +11,6 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class MainRepository @Inject constructor() {
-
     var address = Address()
 
     @Inject
@@ -28,12 +27,12 @@ class MainRepository @Inject constructor() {
             Query.Direction.ASCENDING
         ).addSnapshotListener { snapshots, e ->
             if (e != null) {
-                Timber.w("add snapshot error", e)
+                Timber.d("add snapshot error(${e.message}")
                 return@addSnapshotListener
             }
 
             if (snapshots == null) {
-                Timber.w("snapshots is null")
+                Timber.d("snapshots is null")
                 return@addSnapshotListener
             }
 
@@ -42,8 +41,29 @@ class MainRepository @Inject constructor() {
         }
     }
 
+    fun fetchHostEvents(hostEventResp: MutableLiveData<List<Post>>) {
+        postRef.whereEqualTo("hostUid", firebaseAuth.uid).orderBy(
+            "timestamp",
+            Query.Direction.ASCENDING
+        ).addSnapshotListener { snapshots, e ->
+            if (e != null) {
+                Timber.d("add snapshot error(${e.message})")
+                return@addSnapshotListener
+            }
+
+            if (snapshots == null) {
+                Timber.d("snapshots is null")
+                return@addSnapshotListener
+            }
+
+            val list = snapshots.documents.mapNotNull { it.toObject<Post>() }
+            hostEventResp.postValue(list)
+        }
+    }
+
     fun addPost(post: Post) {
         post.postId = postRef.document().id
+        post.hostUid = firebaseAuth.uid ?: ""
         postRef.document(post.postId).set(post).addOnSuccessListener {
             Timber.d("DocumentSnapshot added Success")
         }.addOnFailureListener { e ->
