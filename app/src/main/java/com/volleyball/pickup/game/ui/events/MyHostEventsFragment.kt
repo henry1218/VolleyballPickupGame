@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.databinding.FragmentMyHostEventsBinding
 import com.volleyball.pickup.game.ui.home.PostAdapter
-import com.volleyball.pickup.game.utils.MY_HOST_POST_VIEW_TYPE
 import com.volleyball.pickup.game.utils.PostViewType
 import dagger.hilt.android.AndroidEntryPoint
 
