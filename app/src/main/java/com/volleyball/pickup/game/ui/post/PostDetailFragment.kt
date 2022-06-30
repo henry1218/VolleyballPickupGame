@@ -1,10 +1,12 @@
 package com.volleyball.pickup.game.ui.post
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +17,7 @@ import com.volleyball.pickup.game.databinding.FragmentPostDetailBinding
 import com.volleyball.pickup.game.ui.widgets.AvatarView
 import com.volleyball.pickup.game.utils.NET_HEIGHT_MAN
 import com.volleyball.pickup.game.utils.NET_HEIGHT_WOMAN
+import com.volleyball.pickup.game.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -49,9 +52,15 @@ class PostDetailFragment : Fragment() {
             }
         }
 
+        binding.fabJoinEvent.setOnClickListener {
+            viewModel.updateEventStatus()
+            binding.fabJoinEvent.isEnabled = false
+        }
+
         viewModel.setBottomNavVisible(false)
         viewModel.fetchPostDetail(args.postId)
         viewModel.postDetail.observe(viewLifecycleOwner) {
+            binding.fabJoinEvent.isEnabled = true
             binding.toolbar.title = it.title
             binding.cvAvatar.setContent {
                 MaterialTheme {
@@ -74,6 +83,25 @@ class PostDetailFragment : Fragment() {
                     }
                     )
             binding.fee.text = (if (it.fee > 0) "\$${it.fee}/人" else "免費")
+            binding.additionalInfo.visible()
+            binding.additionalInfo.text = "其他注意事項:\n${it.additionalInfo}"
+            if (it.players.contains(viewModel.getUid())) {
+                binding.fabJoinEvent.setImageResource(R.drawable.ic_neg_1)
+                binding.fabJoinEvent.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.color_secondary_variant
+                    )
+                )
+            } else {
+                binding.fabJoinEvent.setImageResource(R.drawable.ic_plus_1)
+                binding.fabJoinEvent.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.orange
+                    )
+                )
+            }
         }
 
         return binding.root

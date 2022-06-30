@@ -58,4 +58,14 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     fun removeRegistration() {
         repository.removeRegistration()
     }
+
+    fun updateEventStatus() {
+        postDetail.value?.let {
+            repository.updateEventState(it)
+        }
+    }
+
+    fun getUid(): String {
+        return repository.getUid()
+    }
 }
