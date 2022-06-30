@@ -40,7 +40,7 @@ class PostAdapter(
         fun onBind(post: Post) {
             post.apply {
                 when (viewType) {
-                    PostViewType.HOME -> {
+                    PostViewType.HOME, PostViewType.MY_ATTEND -> {
                         binding.cvAvatar.setContent {
                             MaterialTheme {
                                 AvatarView(profilePic, R.dimen.post_avatar_size)

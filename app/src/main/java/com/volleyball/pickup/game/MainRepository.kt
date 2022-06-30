@@ -53,23 +53,45 @@ class MainRepository @Inject constructor() {
     }
 
     fun fetchHostEvents(hostEventResp: MutableLiveData<List<Post>>) {
-        postRef.whereEqualTo("hostUid", firebaseAuth.uid).orderBy(
-            "timestamp",
-            Query.Direction.ASCENDING
-        ).addSnapshotListener { snapshots, e ->
-            if (e != null) {
-                Timber.d("add snapshot error(${e.message})")
-                return@addSnapshotListener
-            }
+        postRef.whereEqualTo("hostUid", firebaseAuth.uid)
+            .orderBy(
+                "timestamp",
+                Query.Direction.ASCENDING
+            ).addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Timber.d("add snapshot error(${e.message})")
+                    return@addSnapshotListener
+                }
 
-            if (snapshots == null) {
-                Timber.d("snapshots is null")
-                return@addSnapshotListener
-            }
+                if (snapshots == null) {
+                    Timber.d("snapshots is null")
+                    return@addSnapshotListener
+                }
 
-            val list = snapshots.documents.mapNotNull { it.toObject<Post>() }
-            hostEventResp.postValue(list)
-        }
+                val list = snapshots.documents.mapNotNull { it.toObject<Post>() }
+                hostEventResp.postValue(list)
+            }
+    }
+
+    fun fetchAttendEvents(attendEventResp: MutableLiveData<List<Post>>) {
+        postRef.whereArrayContains("players", firebaseAuth.uid.toString())
+            .orderBy(
+                "timestamp",
+                Query.Direction.ASCENDING
+            ).addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Timber.d("add snapshot error(${e.message})")
+                    return@addSnapshotListener
+                }
+
+                if (snapshots == null) {
+                    Timber.d("snapshots is null")
+                    return@addSnapshotListener
+                }
+
+                val list = snapshots.documents.mapNotNull { it.toObject<Post>() }
+                attendEventResp.postValue(list)
+            }
     }
 
     fun fetchPostDetail(postId: String, postDetailResp: SingleLiveEvent<Post>) {
