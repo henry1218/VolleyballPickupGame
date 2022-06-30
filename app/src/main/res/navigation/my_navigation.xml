@@ -11,7 +11,11 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_post_detail"
-            app:destination="@id/navigation_post_detail">
+            app:destination="@id/navigation_post_detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="postId"
                 android:defaultValue=""
@@ -25,10 +29,18 @@
         tools:layout="@layout/fragment_events">
         <action
             android:id="@+id/action_create_post"
-            app:destination="@id/navigation_create_event" />
+            app:destination="@id/navigation_create_event"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_post_detail"
-            app:destination="@id/navigation_post_detail">
+            app:destination="@id/navigation_post_detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="postId"
                 android:defaultValue=""
