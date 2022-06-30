@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val adapter = PostAdapter(PostViewType.HOME, ({ postId ->
+        val adapter = PostAdapter(PostViewType.HOME, itemClick = ({ postId ->
             val action = HomeFragmentDirections.actionPostDetail(postId)
             findNavController().navigate(action)
         }))

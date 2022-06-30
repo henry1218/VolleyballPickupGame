@@ -87,7 +87,7 @@ class PostDetailFragment : Fragment() {
 
             binding.location.text = ("${it.city}${it.locality} ${it.location}")
             val dateFormat = SimpleDateFormat("yyyy/MM/dd EEE HH:mm", Locale.TAIWAN)
-            binding.dateTime.text = ("${dateFormat.format(it.timestamp.toDate())} ~ ${it.endTime}")
+            binding.dateTime.text = ("${dateFormat.format(it.startTimestamp.toDate())} ~ ${it.endTime}")
             binding.netHeight.text = (
                     when (it.netHeight) {
                         NET_HEIGHT_MAN -> "男網"

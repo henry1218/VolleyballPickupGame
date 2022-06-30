@@ -28,13 +28,15 @@ class MainRepository @Inject constructor() {
     @Inject
     lateinit var profileUtils: ProfileUtils
 
+    private var tempPostForEdit = Post()
+
     private lateinit var postDetailRegistration: ListenerRegistration
 
     private val postRef by lazy { firestore.collection("posts") }
 
     fun fetchPosts(postsResp: MutableLiveData<List<Post>>) {
         postRef.orderBy(
-            "timestamp",
+            "startTimestamp",
             Query.Direction.ASCENDING
         ).addSnapshotListener { snapshots, e ->
             if (e != null) {
@@ -55,7 +57,7 @@ class MainRepository @Inject constructor() {
     fun fetchHostEvents(hostEventResp: MutableLiveData<List<Post>>) {
         postRef.whereEqualTo("hostUid", firebaseAuth.uid)
             .orderBy(
-                "timestamp",
+                "startTimestamp",
                 Query.Direction.ASCENDING
             ).addSnapshotListener { snapshots, e ->
                 if (e != null) {
@@ -76,7 +78,7 @@ class MainRepository @Inject constructor() {
     fun fetchAttendEvents(attendEventResp: MutableLiveData<List<Post>>) {
         postRef.whereArrayContains("players", firebaseAuth.uid.toString())
             .orderBy(
-                "timestamp",
+                "startTimestamp",
                 Query.Direction.ASCENDING
             ).addSnapshotListener { snapshots, e ->
                 if (e != null) {
@@ -112,7 +114,7 @@ class MainRepository @Inject constructor() {
 
     fun addPost(post: Post) {
         post.postId = postRef.document().id
-        post.hostUid = firebaseAuth.uid ?: ""
+        post.hostUid = firebaseAuth.uid.toString()
         postRef.document(post.postId).set(post).addOnSuccessListener {
             Timber.d("DocumentSnapshot added Success")
         }.addOnFailureListener { e ->
@@ -120,10 +122,46 @@ class MainRepository @Inject constructor() {
         }
     }
 
+    fun updatePost(post: Post) {
+        post.hostUid = firebaseAuth.uid.toString()
+        postRef.document(post.postId)
+            .update(
+                mapOf(
+                    "title" to post.title,
+                    "date" to post.date,
+                    "startTime" to post.startTime,
+                    "endTime" to post.endTime,
+                    "startTimestamp" to post.startTimestamp,
+                    "endTimestamp" to post.endTimestamp,
+                    "city" to post.city,
+                    "locality" to post.locality,
+                    "location" to post.location,
+                    "netHeight" to post.netHeight,
+                    "fee" to post.fee,
+                    "needMen" to post.needMen,
+                    "needWomen" to post.needWomen,
+                    "needBoth" to post.needBoth,
+                    "additionalInfo" to post.additionalInfo,
+                    "additionalInfo" to post.additionalInfo,
+                )
+            )
+            .addOnCanceledListener {
+                //TODO show hint
+            }
+    }
+
     fun deletePost(postId: String) {
-        postRef.document(postId).delete().addOnCanceledListener {
-            //TODO show hint
-        }
+        postRef.document(postId)
+            .delete()
+            .addOnCanceledListener {
+                //TODO show hint
+            }
+    }
+
+    fun getTempPost(): Post = tempPostForEdit
+
+    fun setTempPost(post: Post) {
+        tempPostForEdit = post
     }
 
     fun updateEventState(post: Post) {

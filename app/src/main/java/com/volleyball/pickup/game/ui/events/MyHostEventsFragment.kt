@@ -31,12 +31,14 @@ class MyHostEventsFragment : Fragment() {
             findNavController().navigate(R.id.action_create_post)
         }
 
-        val adapter = PostAdapter(PostViewType.MY_HOST, actionClick = { postId ->
+        val adapter = PostAdapter(PostViewType.MY_HOST, actionClick = { post ->
             val bottomSheetFragment = BottomSheetFragment(
                 edit = {
-                    //TODO edit
+                    viewModel.setTempPostForEdit(post)
+                    val action = EventsFragmentDirections.actionEditPost(true)
+                    findNavController().navigate(action)
                 }, delete = {
-                    viewModel.deletePost(postId)
+                    viewModel.deletePost(post.postId)
                 })
             bottomSheetFragment.show(childFragmentManager, null)
         })

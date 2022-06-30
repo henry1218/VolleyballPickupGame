@@ -60,8 +60,19 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         repository.addPost(post)
     }
 
+    fun updatePost(post: Post) {
+        post.postId = getTempPostForEdit().postId
+        repository.updatePost(post)
+    }
+
     fun deletePost(postId: String) {
         repository.deletePost(postId)
+    }
+
+    fun getTempPostForEdit(): Post = repository.getTempPost()
+
+    fun setTempPostForEdit(post: Post) {
+        repository.setTempPost(post)
     }
 
     fun signOut() {

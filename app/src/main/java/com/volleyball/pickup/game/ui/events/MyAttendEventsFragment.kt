@@ -26,10 +26,10 @@ class MyAttendEventsFragment : Fragment() {
     ): View {
         _binding = FragmentMyAttendEventsBinding.inflate(inflater, container, false)
 
-        val adapter = PostAdapter(PostViewType.MY_ATTEND) { postId ->
+        val adapter = PostAdapter(PostViewType.MY_ATTEND, itemClick = { postId ->
             val action = EventsFragmentDirections.actionPostDetail(postId)
             findNavController().navigate(action)
-        }
+        })
         binding.myAttendListView.adapter = adapter
 
         viewModel.fetchAttendEvent()

@@ -18,7 +18,7 @@ import java.util.*
 class PostAdapter(
     private val viewType: PostViewType,
     val itemClick: ((id: String) -> Unit)? = null,
-    val actionClick: ((id: String) -> Unit)? = null
+    val actionClick: ((post: Post) -> Unit)? = null
 ) :
     ListAdapter<Post, RecyclerView.ViewHolder>(DiffCallback()) {
 
@@ -69,7 +69,7 @@ class PostAdapter(
                 }
                 binding.location.text = ("${city}${locality} $location")
                 val dateFormat = SimpleDateFormat("yyyy/MM/dd EEE HH:mm", Locale.TAIWAN)
-                binding.dateTime.text = ("${dateFormat.format(timestamp.toDate())} ~ $endTime")
+                binding.dateTime.text = ("${dateFormat.format(startTimestamp.toDate())} ~ $endTime")
                 binding.netHeight.text = (
                         when (post.netHeight) {
                             NET_HEIGHT_MAN -> "男網"
@@ -85,7 +85,7 @@ class PostAdapter(
             }
 
             binding.btnAction.setOnClickListener {
-                actionClick?.invoke(post.postId)
+                actionClick?.invoke(post)
             }
         }
     }

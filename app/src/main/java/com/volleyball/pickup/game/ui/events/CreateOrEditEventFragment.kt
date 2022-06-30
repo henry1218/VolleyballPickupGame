@@ -14,12 +14,13 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Timestamp
 import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.R
-import com.volleyball.pickup.game.databinding.FragmentCreateEventBinding
+import com.volleyball.pickup.game.databinding.FragmentCreateOrEditEventBinding
 import com.volleyball.pickup.game.models.Post
 import com.volleyball.pickup.game.utils.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,9 +29,10 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CreateEventFragment : Fragment() {
+class CreateOrEditEventFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
-    private var _binding: FragmentCreateEventBinding? = null
+    private val args: CreateOrEditEventFragmentArgs by navArgs()
+    private var _binding: FragmentCreateOrEditEventBinding? = null
     private val binding get() = _binding!!
     private val calendar = Calendar.getInstance()
     private val dateFormatter = SimpleDateFormat("yyyy/MM/dd EEE", Locale.TAIWAN)
@@ -49,7 +51,7 @@ class CreateEventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel.setBottomNavVisible(false)
-        _binding = FragmentCreateEventBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateOrEditEventBinding.inflate(inflater, container, false)
         binding.toolbar.setNavigationIcon(R.drawable.ic_close)
         binding.toolbar.inflateMenu(R.menu.events_menu)
         binding.toolbar.setNavigationOnClickListener {
@@ -84,26 +86,30 @@ class CreateEventFragment : Fragment() {
 
             when (it.itemId) {
                 R.id.submit -> {
-                    viewModel.addPost(
-                        Post(
-                            title = binding.title.text.toString(),
-                            date = binding.date.text.toString(),
-                            startTime = binding.startTime.text.toString(),
-                            endTime = binding.endTime.text.toString(),
-                            timestamp = Timestamp(startTime!!.time),
-                            city = binding.citySelected.text.toString(),
-                            locality = binding.localitySelected.text.toString(),
-                            location = binding.location.text.toString(),
-                            netHeight = netHeightId,
-                            fee = numberFormat(binding.fee),
-                            needMen = numberFormat(binding.playerManAmount),
-                            needWomen = numberFormat(binding.playerWomanAmount),
-                            needBoth = numberFormat(binding.playerBothAmount),
-                            additionalInfo = binding.additional.text.toString(),
-                            profilePic = profileUtils.getSmallProfilePic(),
-                            hostName = profileUtils.getName()
-                        )
+                    val post = Post(
+                        title = binding.title.text.toString(),
+                        date = binding.date.text.toString(),
+                        startTime = binding.startTime.text.toString(),
+                        endTime = binding.endTime.text.toString(),
+                        startTimestamp = Timestamp(startTime!!.time),
+                        endTimestamp = Timestamp(endTime!!.time),
+                        city = binding.citySelected.text.toString(),
+                        locality = binding.localitySelected.text.toString(),
+                        location = binding.location.text.toString(),
+                        netHeight = netHeightId,
+                        fee = numberFormat(binding.fee),
+                        needMen = numberFormat(binding.playerManAmount),
+                        needWomen = numberFormat(binding.playerWomanAmount),
+                        needBoth = numberFormat(binding.playerBothAmount),
+                        additionalInfo = binding.additional.text.toString(),
+                        profilePic = profileUtils.getSmallProfilePic(),
+                        hostName = profileUtils.getName()
                     )
+                    if (args.isEdit) {
+                        viewModel.updatePost(post)
+                    } else {
+                        viewModel.addPost(post)
+                    }
                     findNavController().popBackStack()
                     true
                 }
@@ -244,6 +250,34 @@ class CreateEventFragment : Fragment() {
             }
         }
 
+        if (args.isEdit) {
+            viewModel.getTempPostForEdit().let {
+                binding.toolbar.title = "編輯"
+                binding.title.setText(it.title)
+                calendar.time = it.startTimestamp.toDate()
+                startTime = Calendar.getInstance().apply { time = it.startTimestamp.toDate() }
+                endTime = Calendar.getInstance().apply { time = it.endTimestamp.toDate() }
+                binding.date.setText(it.date)
+                binding.startTime.setText(it.startTime)
+                binding.endTime.setText(it.endTime)
+                binding.citySelected.setText(it.city, false)
+                binding.localitySelected.setText(it.locality, false)
+                binding.location.setText(it.location)
+                binding.rgNetHeight.check(
+                    when (it.netHeight) {
+                        NET_HEIGHT_MAN -> R.id.rb_net_man
+                        NET_HEIGHT_WOMAN -> R.id.rb_net_woman
+                        else -> R.id.rb_net_between
+                    }
+                )
+                binding.fee.setText(it.fee.toString())
+                binding.playerManAmount.setText(it.needMen.toString())
+                binding.playerWomanAmount.setText(it.needWomen.toString())
+                binding.playerBothAmount.setText(it.needBoth.toString())
+                binding.additional.setText(it.additionalInfo)
+            }
+        }
+
         return binding.root
     }
 
@@ -294,10 +328,9 @@ class CreateEventFragment : Fragment() {
 
     private fun numberFormat(textInputEditText: TextInputEditText): Int {
         textInputEditText.apply {
-            return if (text.toString().isEmpty())
-                0
-            else {
-                text.toString().removePrefix("0").toInt()
+            return when {
+                text.toString().isEmpty() -> 0
+                else -> text.toString().toInt()
             }
         }
     }

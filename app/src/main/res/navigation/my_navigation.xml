@@ -29,7 +29,14 @@
         tools:layout="@layout/fragment_events">
         <action
             android:id="@+id/action_create_post"
-            app:destination="@id/navigation_create_event"
+            app:destination="@id/navigation_create_or_edit_event"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_edit_post"
+            app:destination="@id/navigation_create_or_edit_event"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -40,12 +47,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-            <argument
-                android:name="postId"
-                android:defaultValue=""
-                app:argType="string" />
-        </action>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -54,9 +56,14 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/navigation_create_event"
-        android:name="com.volleyball.pickup.game.ui.events.CreateEventFragment"
-        tools:layout="@layout/fragment_create_event" />
+        android:id="@+id/navigation_create_or_edit_event"
+        android:name="com.volleyball.pickup.game.ui.events.CreateOrEditEventFragment"
+        tools:layout="@layout/fragment_create_or_edit_event">
+        <argument
+            android:name="isEdit"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_post_detail"

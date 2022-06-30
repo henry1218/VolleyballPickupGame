@@ -13,7 +13,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="新增揪團打排球"
+        app:title="新增"
         app:titleCentered="true" />
 
     <ScrollView
