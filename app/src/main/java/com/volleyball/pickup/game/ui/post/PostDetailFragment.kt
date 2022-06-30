@@ -17,6 +17,7 @@ import com.volleyball.pickup.game.databinding.FragmentPostDetailBinding
 import com.volleyball.pickup.game.ui.widgets.AvatarView
 import com.volleyball.pickup.game.utils.NET_HEIGHT_MAN
 import com.volleyball.pickup.game.utils.NET_HEIGHT_WOMAN
+import com.volleyball.pickup.game.utils.gone
 import com.volleyball.pickup.game.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -70,8 +71,20 @@ class PostDetailFragment : Fragment() {
             binding.hostName.text = it.hostName
             binding.title.text = it.title
             binding.going.text = ("已報名${it.players.size}位")
-            val left = if (it.needBoth > 0) it.needBoth else it.needMen + it.needWomen
-            binding.left.text = (if (left > 0) "缺${left}位" else "人數不限")
+            val need = if (it.needBoth > 0) it.needBoth else it.needMen + it.needWomen
+            val left = need - it.players.size
+            if (need > 0) {
+                binding.need.text = "(${need})"
+                binding.left.text = if (left > 0) {
+                    "尚缺${left}位"
+                } else {
+                    "已滿"
+                }
+            } else {
+                binding.need.text = "(不限)"
+                binding.left.gone()
+            }
+
             binding.location.text = ("${it.city}${it.locality} ${it.location}")
             val dateFormat = SimpleDateFormat("yyyy/MM/dd EEE HH:mm", Locale.TAIWAN)
             binding.dateTime.text = ("${dateFormat.format(it.timestamp.toDate())} ~ ${it.endTime}")
@@ -84,7 +97,7 @@ class PostDetailFragment : Fragment() {
                     )
             binding.fee.text = (if (it.fee > 0) "\$${it.fee}/人" else "免費")
             binding.additionalInfo.visible()
-            binding.additionalInfo.text = "其他注意事項:\n${it.additionalInfo}"
+            binding.additionalInfo.text = it.additionalInfo
             if (it.players.contains(viewModel.getUid())) {
                 binding.fabJoinEvent.setImageResource(R.drawable.ic_neg_1)
                 binding.fabJoinEvent.backgroundTintList = ColorStateList.valueOf(

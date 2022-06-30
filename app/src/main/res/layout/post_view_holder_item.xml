@@ -45,24 +45,18 @@
             tools:text="徵臨打1位" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/going"
+            android:id="@+id/players_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:drawableStart="@drawable/ic_group"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="已報名1位" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            app:layout_constraintStart_toEndOf="@+id/going"
-            app:layout_constraintTop_toTopOf="@id/going"
-            tools:text="缺2位" />
+            tools:text="尚缺2位 已報名1位" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/location"
@@ -75,7 +69,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/going"
+            app:layout_constraintTop_toBottomOf="@id/players_status"
             tools:text="新北市新莊區 國民運動中心2F" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -121,6 +115,18 @@
             tools:text="$120" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/additional_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="揪團說明與注意事項"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fee"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/additional_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -132,8 +138,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fee"
-            tools:text="additional info"
+            app:layout_constraintTop_toBottomOf="@id/additional_text"
+            tools:text="先到先打，打二休一(贏或輸)，打完三場分隊(第四場開始，不再對練三顆，上場就發球，換隊伍時盡快上場，就可以多打幾局)木頭地室內場請攜帶室內鞋，請提早5-10分鐘來幫忙架網，謝謝"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="8dp"
+        android:padding="16dp"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -29,84 +30,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.compose.ui.platform.ComposeView
-                android:id="@+id/cv_avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_height="50dp"
-                tools:layout_width="50dp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/host_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                app:layout_constraintBottom_toBottomOf="@id/cv_avatar"
-                app:layout_constraintStart_toEndOf="@id/cv_avatar"
-                app:layout_constraintTop_toTopOf="@id/cv_avatar"
-                tools:text="Host Name" />
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cv_avatar"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="徵臨打1位" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/going"
+                android:id="@+id/date_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title"
-                tools:text="已報名1位" />
+                tools:text="2022/09/09 週一 15:00 ~ 16:00" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                app:layout_constraintStart_toEndOf="@+id/going"
-                app:layout_constraintTop_toTopOf="@id/going"
-                tools:text="缺2位" />
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/color_secondary_variant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/date_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="4dp"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/going"
+                app:layout_constraintTop_toBottomOf="@id/divider1"
                 tools:text="新北市新莊區 國民運動中心2F" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/date_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawableStart="@drawable/ic_calendar"
-                android:drawablePadding="4dp"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/location"
-                tools:text="2022/09/09 週一 15:00 ~ 16:00" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/net_height"
@@ -119,7 +88,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/date_time"
+                app:layout_constraintTop_toBottomOf="@id/location"
                 tools:text="男網" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -137,19 +106,117 @@
                 tools:text="$120" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/host_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="主揪"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fee" />
+
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/cv_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/host_text"
+                tools:layout_height="50dp"
+                tools:layout_width="50dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/host_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintBottom_toBottomOf="@id/cv_avatar"
+                app:layout_constraintStart_toEndOf="@id/cv_avatar"
+                app:layout_constraintTop_toTopOf="@id/cv_avatar"
+                tools:text="Host Name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/remark_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="揪團說明與注意事項"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_avatar" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/additional_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="top"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fee"
-                tools:text="additional info"
-                tools:visibility="visible" />
+                app:layout_constraintTop_toBottomOf="@id/remark_text"
+                tools:text="先到先打，打二休一(贏或輸)，打完三場分隊(第四場開始，不再對練三顆，上場就發球，換隊伍時盡快上場，就可以多打幾局)木頭地室內場請攜帶室內鞋，請提早5-10分鐘來幫忙架網，謝謝" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/attendees_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="需求人數"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/additional_info" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/need"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/attendees_text"
+                app:layout_constraintTop_toBottomOf="@id/additional_info"
+                tools:text="(3)" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/going"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/attendees_text"
+                tools:text="已報名1位" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintStart_toEndOf="@+id/going"
+                app:layout_constraintTop_toTopOf="@id/going"
+                tools:text="尚缺2位" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/check_attendees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="128dp"
+                android:text="查看已報名"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/color_secondary_variant"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/going" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

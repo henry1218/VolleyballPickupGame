@@ -51,15 +51,20 @@ class PostAdapter(
                     PostViewType.MY_HOST -> {
                         binding.cvAvatar.gone()
                         binding.hostName.gone()
+                        binding.additionalText.visible()
                         binding.additionalInfo.visible()
-                        binding.additionalInfo.text = "其他注意事項:\n$additionalInfo"
+                        binding.additionalInfo.text = additionalInfo
                     }
                 }
 
                 binding.title.text = title
-                binding.going.text = ("已報名${players.size}位")
-                val left = if (needBoth > 0) needBoth else needMen + needWomen
-                binding.left.text = (if (left > 0) "缺${left}位" else "人數不限")
+                val need = if (needBoth > 0) needBoth else needMen + needWomen
+                val left = need - players.size
+                binding.playersStatus.text = when {
+                    need == 0 -> "人數不限 已報名${players.size}位"
+                    left > 0 -> "尚缺${left}位 已報名${players.size}位"
+                    else -> "已滿"
+                }
                 binding.location.text = ("${city}${locality} $location")
                 val dateFormat = SimpleDateFormat("yyyy/MM/dd EEE HH:mm", Locale.TAIWAN)
                 binding.dateTime.text = ("${dateFormat.format(timestamp.toDate())} ~ $endTime")
