@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.volleyball.pickup.game.MainViewModel
+import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.FragmentMyHostEventsBinding
 import com.volleyball.pickup.game.ui.home.PostAdapter
 import com.volleyball.pickup.game.utils.PostViewType
@@ -24,6 +26,9 @@ class MyHostEventsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMyHostEventsBinding.inflate(inflater, container, false)
+        binding.fabCreateEvent.setOnClickListener {
+            findNavController().navigate(R.id.action_create_post)
+        }
 
         val adapter = PostAdapter(PostViewType.MY_HOST)
         binding.myHostListView.adapter = adapter
