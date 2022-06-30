@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.databinding.FragmentMyAttendEventsBinding
 import com.volleyball.pickup.game.ui.home.PostAdapter
@@ -25,7 +26,10 @@ class MyAttendEventsFragment : Fragment() {
     ): View {
         _binding = FragmentMyAttendEventsBinding.inflate(inflater, container, false)
 
-        val adapter = PostAdapter(PostViewType.MY_ATTEND)
+        val adapter = PostAdapter(PostViewType.MY_ATTEND) { postId ->
+            val action = EventsFragmentDirections.actionPostDetail(postId)
+            findNavController().navigate(action)
+        }
         binding.myAttendListView.adapter = adapter
 
         viewModel.fetchAttendEvent()
