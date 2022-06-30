@@ -11,6 +11,7 @@ import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.FragmentMyHostEventsBinding
 import com.volleyball.pickup.game.ui.home.PostAdapter
+import com.volleyball.pickup.game.ui.widgets.BottomSheetFragment
 import com.volleyball.pickup.game.utils.PostViewType
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +31,16 @@ class MyHostEventsFragment : Fragment() {
             findNavController().navigate(R.id.action_create_post)
         }
 
-        val adapter = PostAdapter(PostViewType.MY_HOST)
+        val adapter = PostAdapter(PostViewType.MY_HOST, actionClick = { postId ->
+            val bottomSheetFragment = BottomSheetFragment(
+                edit = {
+                    //TODO edit
+                }, delete = {
+                    viewModel.deletePost(postId)
+                })
+            bottomSheetFragment.show(childFragmentManager, null)
+        })
+
         binding.myHostListView.adapter = adapter
 
         viewModel.fetchHostEvent()

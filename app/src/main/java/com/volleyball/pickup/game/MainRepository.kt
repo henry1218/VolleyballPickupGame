@@ -120,6 +120,12 @@ class MainRepository @Inject constructor() {
         }
     }
 
+    fun deletePost(postId: String) {
+        postRef.document(postId).delete().addOnCanceledListener {
+            //TODO show hint
+        }
+    }
+
     fun updateEventState(post: Post) {
         val playersDocument = postRef.document(post.postId)
             .collection("players")

@@ -13,6 +13,18 @@
         android:layout_height="match_parent"
         android:padding="8dp">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_more"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteY="8dp"
+            tools:visibility="visible" />
+
         <androidx.compose.ui.platform.ComposeView
             android:id="@+id/cv_avatar"
             android:layout_width="wrap_content"

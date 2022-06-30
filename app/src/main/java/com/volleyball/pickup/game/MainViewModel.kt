@@ -60,6 +60,10 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         repository.addPost(post)
     }
 
+    fun deletePost(postId: String) {
+        repository.deletePost(postId)
+    }
+
     fun signOut() {
         repository.signOut()
     }

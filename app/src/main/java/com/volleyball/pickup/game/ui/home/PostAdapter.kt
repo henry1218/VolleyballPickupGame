@@ -17,7 +17,8 @@ import java.util.*
 
 class PostAdapter(
     private val viewType: PostViewType,
-    val itemClick: ((id: String) -> Unit)? = null
+    val itemClick: ((id: String) -> Unit)? = null,
+    val actionClick: ((id: String) -> Unit)? = null
 ) :
     ListAdapter<Post, RecyclerView.ViewHolder>(DiffCallback()) {
 
@@ -54,6 +55,7 @@ class PostAdapter(
                         binding.additionalText.visible()
                         binding.additionalInfo.visible()
                         binding.additionalInfo.text = additionalInfo
+                        binding.btnAction.visible()
                     }
                 }
 
@@ -80,6 +82,10 @@ class PostAdapter(
 
             itemView.setOnClickListener {
                 itemClick?.invoke(post.postId)
+            }
+
+            binding.btnAction.setOnClickListener {
+                actionClick?.invoke(post.postId)
             }
         }
     }
