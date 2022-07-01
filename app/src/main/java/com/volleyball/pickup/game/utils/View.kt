@@ -9,3 +9,7 @@ fun View.gone() {
 fun View.visible() {
     this.visibility = View.VISIBLE
 }
+
+fun View.visibleIf(predicate: Boolean) {
+    this.visibility = if (predicate) View.VISIBLE else View.GONE
+}

@@ -11,6 +11,7 @@ import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.databinding.FragmentMySignUpEventsBinding
 import com.volleyball.pickup.game.ui.home.PostAdapter
 import com.volleyball.pickup.game.utils.PostViewType
+import com.volleyball.pickup.game.utils.visibleIf
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,6 +35,7 @@ class MySignUpEventsFragment : Fragment() {
 
         viewModel.fetchSignedUpEvent()
         viewModel.signedUpEventList.observe(viewLifecycleOwner) {
+            binding.groupEmpty.visibleIf(it.isEmpty())
             adapter.submitList(it)
         }
 

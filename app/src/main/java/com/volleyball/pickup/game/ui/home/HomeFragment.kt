@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.databinding.FragmentHomeBinding
 import com.volleyball.pickup.game.utils.PostViewType
+import com.volleyball.pickup.game.utils.visibleIf
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
 
         viewModel.fetchPosts()
         viewModel.postList.observe(viewLifecycleOwner) {
+            binding.groupEmpty.visibleIf(it.isEmpty())
             adapter.submitList(it)
         }
 

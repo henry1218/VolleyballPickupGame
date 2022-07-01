@@ -44,4 +44,5 @@
     <string name="register_success">+1成功</string>
     <string name="unregister_success">-1成功</string>
     <string name="event_not_exist">揪團已被刪除</string>
+    <string name="no_events">尚無揪團&#8230;</string>
 </resources>

@@ -13,6 +13,7 @@ import com.volleyball.pickup.game.databinding.FragmentMyHostEventsBinding
 import com.volleyball.pickup.game.ui.home.PostAdapter
 import com.volleyball.pickup.game.ui.widgets.BottomSheetFragment
 import com.volleyball.pickup.game.utils.PostViewType
+import com.volleyball.pickup.game.utils.visibleIf
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,6 +48,7 @@ class MyHostEventsFragment : Fragment() {
 
         viewModel.fetchHostEvent()
         viewModel.hostEventList.observe(viewLifecycleOwner) {
+            binding.groupEmpty.visibleIf(it.isEmpty())
             adapter.submitList(it)
         }
 
