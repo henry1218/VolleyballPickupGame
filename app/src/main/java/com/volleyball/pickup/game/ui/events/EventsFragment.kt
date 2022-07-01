@@ -30,7 +30,7 @@ class EventsFragment : Fragment() {
         binding.viewpager.isUserInputEnabled = false
         TabLayoutMediator(binding.tabLayout, binding.viewpager) { tab, position ->
             when (position) {
-                0 -> tab.text = getString(R.string.joined_events)
+                0 -> tab.text = getString(R.string.signed_up_events)
                 1 -> tab.text = getString(R.string.host_events)
             }
         }.attach()
@@ -47,7 +47,7 @@ class EventsFragment : Fragment() {
         FragmentStateAdapter(fragmentManager, lifecycle) {
 
         private var fragments: ArrayList<Fragment> = arrayListOf(
-            MyAttendEventsFragment(),
+            MySignUpEventsFragment(),
             MyHostEventsFragment(),
         )
 

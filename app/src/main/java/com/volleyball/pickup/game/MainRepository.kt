@@ -75,7 +75,7 @@ class MainRepository @Inject constructor() {
             }
     }
 
-    fun fetchAttendEvents(attendEventResp: MutableLiveData<List<Post>>) {
+    fun fetchSignedUpEvents(signedUpEventResp: MutableLiveData<List<Post>>) {
         postRef.whereArrayContains("players", firebaseAuth.uid.toString())
             .orderBy(
                 "startTimestamp",
@@ -92,7 +92,7 @@ class MainRepository @Inject constructor() {
                 }
 
                 val list = snapshots.documents.mapNotNull { it.toObject<Post>() }
-                attendEventResp.postValue(list)
+                signedUpEventResp.postValue(list)
             }
     }
 

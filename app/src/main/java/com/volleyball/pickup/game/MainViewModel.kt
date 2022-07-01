@@ -20,8 +20,8 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private val _hostEventList = MutableLiveData<List<Post>>()
     val hostEventList: LiveData<List<Post>> = _hostEventList
 
-    private val _attendEventList = MutableLiveData<List<Post>>()
-    val attendEventList: LiveData<List<Post>> = _attendEventList
+    private val _signedUpEventList = MutableLiveData<List<Post>>()
+    val signedUpEventList: LiveData<List<Post>> = _signedUpEventList
 
     private val _postDetail = SingleLiveEvent<Post>()
     val postDetail: SingleLiveEvent<Post> = _postDetail
@@ -38,9 +38,9 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         }
     }
 
-    fun fetchAttendEvent() {
-        if (_attendEventList.value == null) {
-            repository.fetchAttendEvents(_attendEventList)
+    fun fetchSignedUpEvent() {
+        if (_signedUpEventList.value == null) {
+            repository.fetchSignedUpEvents(_signedUpEventList)
         }
     }
 

@@ -13,11 +13,11 @@
     <string name="additional_info">揪團說明與注意事項</string>
     <string name="filled">已滿</string>
     <string name="free">免費</string>
-    <string name="unlimited_joined">人數不限 已報名%1$d位</string>
-    <string name="left_joined">尚缺%1$d位 已報名%2$d位</string>
+    <string name="unlimited_signed_up">人數不限 已報名%1$d位</string>
+    <string name="left_signed_up">尚缺%1$d位 已報名%2$d位</string>
     <string name="fee_per_person">\u0024%1$d/人</string>
     <string name="left_spots">尚缺%1$d位</string>
-    <string name="joined">已報名%1$d位</string>
+    <string name="number_of_signed_up">已報名%1$d位</string>
     <string name="unlimited">不限</string>
     <string name="required">不能為空</string>
     <string name="edit">編輯</string>
@@ -33,8 +33,8 @@
     <string name="number_of_people">人數</string>
     <string name="host">主揪</string>
     <string name="number_of_people_need">需求人數</string>
-    <string name="view_joined">查看已報名</string>
-    <string name="joined_events">已報名揪團</string>
+    <string name="view_people_signed_up">查看已報名</string>
+    <string name="signed_up_events">已報名揪團</string>
     <string name="host_events">我的揪團</string>
     <string name="delete">刪除</string>
 </resources>

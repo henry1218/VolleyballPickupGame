@@ -44,7 +44,7 @@ class PostAdapter(
         fun onBind(post: Post) {
             post.apply {
                 when (viewType) {
-                    PostViewType.HOME, PostViewType.MY_ATTEND -> {
+                    PostViewType.HOME, PostViewType.MY_SIGNED_UP -> {
                         binding.cvAvatar.setContent {
                             MaterialTheme {
                                 AvatarView(profilePic, R.dimen.post_avatar_size)
@@ -66,8 +66,8 @@ class PostAdapter(
                 val need = if (needBoth > 0) needBoth else needMen + needWomen
                 val left = need - players.size
                 binding.playersStatus.text = when {
-                    need == 0 -> itemView.context.getString(R.string.unlimited_joined, players.size)
-                    left > 0 -> itemView.context.getString(R.string.left_joined, left, players.size)
+                    need == 0 -> itemView.context.getString(R.string.unlimited_signed_up, players.size)
+                    left > 0 -> itemView.context.getString(R.string.left_signed_up, left, players.size)
                     else -> itemView.context.getString(R.string.filled)
                 }
                 binding.location.text = ("${city}${locality} $location")

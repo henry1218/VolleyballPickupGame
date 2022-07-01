@@ -220,7 +220,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="128dp"
-                android:text="@string/view_joined"
+                android:text="@string/view_people_signed_up"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:textColor="@color/color_secondary_variant"
                 android:textStyle="bold"
@@ -233,7 +233,7 @@
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_join_event"
+        android:id="@+id/fab_signed_up_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

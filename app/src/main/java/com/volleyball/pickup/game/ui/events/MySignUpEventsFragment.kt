@@ -8,14 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.volleyball.pickup.game.MainViewModel
-import com.volleyball.pickup.game.databinding.FragmentMyAttendEventsBinding
+import com.volleyball.pickup.game.databinding.FragmentMySignUpEventsBinding
 import com.volleyball.pickup.game.ui.home.PostAdapter
 import com.volleyball.pickup.game.utils.PostViewType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MyAttendEventsFragment : Fragment() {
-    private var _binding: FragmentMyAttendEventsBinding? = null
+class MySignUpEventsFragment : Fragment() {
+    private var _binding: FragmentMySignUpEventsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -24,16 +24,16 @@ class MyAttendEventsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMyAttendEventsBinding.inflate(inflater, container, false)
+        _binding = FragmentMySignUpEventsBinding.inflate(inflater, container, false)
 
-        val adapter = PostAdapter(PostViewType.MY_ATTEND, itemClick = { postId ->
+        val adapter = PostAdapter(PostViewType.MY_SIGNED_UP, itemClick = { postId ->
             val action = EventsFragmentDirections.actionPostDetail(postId)
             findNavController().navigate(action)
         })
-        binding.myAttendListView.adapter = adapter
+        binding.mySignedUpListView.adapter = adapter
 
-        viewModel.fetchAttendEvent()
-        viewModel.attendEventList.observe(viewLifecycleOwner) {
+        viewModel.fetchSignedUpEvent()
+        viewModel.signedUpEventList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 

@@ -52,15 +52,15 @@ class PostDetailFragment : Fragment() {
             }
         }
 
-        binding.fabJoinEvent.setOnClickListener {
+        binding.fabSignedUpEvent.setOnClickListener {
             viewModel.updateEventStatus()
-            binding.fabJoinEvent.isEnabled = false
+            binding.fabSignedUpEvent.isEnabled = false
         }
 
         viewModel.setBottomNavVisible(false)
         viewModel.fetchPostDetail(args.postId)
         viewModel.postDetail.observe(viewLifecycleOwner) {
-            binding.fabJoinEvent.isEnabled = true
+            binding.fabSignedUpEvent.isEnabled = true
             binding.toolbar.title = it.title
             binding.cvAvatar.setContent {
                 MaterialTheme {
@@ -69,7 +69,7 @@ class PostDetailFragment : Fragment() {
             }
             binding.hostName.text = it.hostName
             binding.title.text = it.title
-            binding.going.text = getString(R.string.joined, it.players.size)
+            binding.going.text = getString(R.string.number_of_signed_up, it.players.size)
             val need = if (it.needBoth > 0) it.needBoth else it.needMen + it.needWomen
             val left = need - it.players.size
             if (need > 0) {
@@ -92,16 +92,16 @@ class PostDetailFragment : Fragment() {
             binding.additionalInfo.visible()
             binding.additionalInfo.text = it.additionalInfo
             if (it.players.contains(viewModel.getUid())) {
-                binding.fabJoinEvent.setImageResource(R.drawable.ic_neg_1)
-                binding.fabJoinEvent.backgroundTintList = ColorStateList.valueOf(
+                binding.fabSignedUpEvent.setImageResource(R.drawable.ic_neg_1)
+                binding.fabSignedUpEvent.backgroundTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(
                         requireContext(),
                         R.color.color_secondary_variant
                     )
                 )
             } else {
-                binding.fabJoinEvent.setImageResource(R.drawable.ic_plus_1)
-                binding.fabJoinEvent.backgroundTintList = ColorStateList.valueOf(
+                binding.fabSignedUpEvent.setImageResource(R.drawable.ic_plus_1)
+                binding.fabSignedUpEvent.backgroundTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(
                         requireContext(),
                         R.color.orange
