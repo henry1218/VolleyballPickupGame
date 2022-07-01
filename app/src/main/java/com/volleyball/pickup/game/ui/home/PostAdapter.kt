@@ -11,7 +11,10 @@ import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.PostViewHolderItemBinding
 import com.volleyball.pickup.game.models.Post
 import com.volleyball.pickup.game.ui.widgets.AvatarView
-import com.volleyball.pickup.game.utils.*
+import com.volleyball.pickup.game.utils.NetHeight
+import com.volleyball.pickup.game.utils.PostViewType
+import com.volleyball.pickup.game.utils.gone
+import com.volleyball.pickup.game.utils.visible
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,21 +66,17 @@ class PostAdapter(
                 val need = if (needBoth > 0) needBoth else needMen + needWomen
                 val left = need - players.size
                 binding.playersStatus.text = when {
-                    need == 0 -> "人數不限 已報名${players.size}位"
-                    left > 0 -> "尚缺${left}位 已報名${players.size}位"
-                    else -> "已滿"
+                    need == 0 -> itemView.context.getString(R.string.unlimited_joined, players.size)
+                    left > 0 -> itemView.context.getString(R.string.left_joined, left, players.size)
+                    else -> itemView.context.getString(R.string.filled)
                 }
                 binding.location.text = ("${city}${locality} $location")
                 val dateFormat = SimpleDateFormat("yyyy/MM/dd EEE HH:mm", Locale.TAIWAN)
                 binding.dateTime.text = ("${dateFormat.format(startTimestamp.toDate())} ~ $endTime")
-                binding.netHeight.text = (
-                        when (post.netHeight) {
-                            NET_HEIGHT_MAN -> "男網"
-                            NET_HEIGHT_WOMAN -> "女網"
-                            else -> "介於男網與女網之間"
-                        }
-                        )
-                binding.fee.text = (if (fee > 0) "\$${fee}/人" else "免費")
+                binding.netHeight.text = itemView.context.getString(NetHeight.getStringRes(post.netHeight))
+                binding.fee.text =
+                    if (fee > 0) itemView.context.getString(R.string.fee_per_person, fee)
+                    else itemView.context.getString(R.string.free)
             }
 
             itemView.setOnClickListener {

@@ -16,7 +16,7 @@
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
         android:padding="16dp"
-        android:text="編輯"
+        android:text="@string/edit"
         android:textColor="@color/color_secondary_variant" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -28,6 +28,6 @@
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
         android:padding="16dp"
-        android:text="刪除"
+        android:text="@string/delete"
         android:textColor="@color/color_secondary_variant" />
 </LinearLayout>

@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="標題*"
+                android:text="@string/title_required"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="日期*"
+                android:text="@string/date_required"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_input_layout" />
 
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="開始時間*"
+                android:text="@string/start_time_required"
                 app:layout_constraintStart_toStartOf="@+id/start_time_input_layout"
                 app:layout_constraintTop_toBottomOf="@+id/date_input_layout" />
 
@@ -135,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="結束時間*"
+                android:text="@string/end_time_required"
                 app:layout_constraintStart_toStartOf="@+id/end_time_input_layout"
                 app:layout_constraintTop_toBottomOf="@+id/date_input_layout" />
 
@@ -168,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="地點*"
+                android:text="@string/location_required"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/start_time_input_layout" />
 
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
-                android:hint="縣市"
+                android:hint="@string/city"
                 app:layout_constraintEnd_toStartOf="@id/locality_spinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/location_text">
@@ -198,7 +198,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="區域"
+                android:hint="@string/locality"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/city_spinner"
                 app:layout_constraintTop_toTopOf="@id/city_spinner">
@@ -239,7 +239,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="網高"
+                android:text="@string/net_height"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_input_layout" />
 
@@ -262,7 +262,7 @@
                     android:gravity="center"
                     android:minWidth="80dp"
                     android:paddingHorizontal="8dp"
-                    android:text="男網"
+                    android:text="@string/net_height_man"
                     android:textColor="@color/net_height_selector_text" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
@@ -275,20 +275,7 @@
                     android:gravity="center"
                     android:minWidth="80dp"
                     android:paddingHorizontal="8dp"
-                    android:text="女網"
-                    android:textColor="@color/net_height_selector_text" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_net_between"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:background="@drawable/net_height_btn_bg"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:minWidth="80dp"
-                    android:paddingHorizontal="8dp"
-                    android:text="介於男網與女網之間"
+                    android:text="@string/net_height_woman"
                     android:textColor="@color/net_height_selector_text" />
 
             </RadioGroup>
@@ -298,7 +285,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="費用"
+                android:text="@string/fee"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rg_net_height" />
 
@@ -332,7 +319,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="人數"
+                android:text="@string/number_of_people"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fee_input_layout" />
 
@@ -417,7 +404,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="揪團說明與注意事項"
+                android:text="@string/additional_info"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/player_man_layout" />
 

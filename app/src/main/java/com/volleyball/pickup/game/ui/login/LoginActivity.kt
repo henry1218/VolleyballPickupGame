@@ -11,6 +11,7 @@ import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.material.snackbar.Snackbar
 import com.volleyball.pickup.game.MainActivity
+import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -27,13 +28,14 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.apply {
             toolTipMode = LoginButton.ToolTipMode.NEVER_DISPLAY
-            setLogoutText("登入中...")
+            setLogoutText(context.getString(R.string.login))
             setPermissions(listOf("public_profile"))
             registerCallback(
                 CallbackManager.Factory.create(),
                 object : FacebookCallback<LoginResult> {
                     override fun onCancel() {
-                        val snack = Snackbar.make(this@apply, "登入取消", Snackbar.LENGTH_LONG)
+                        val snack =
+                            Snackbar.make(this@apply, context.getString(R.string.login_cancel), Snackbar.LENGTH_LONG)
                         snack.show()
                     }
 
@@ -61,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
-                val snack = Snackbar.make(binding.root, "登入失敗，請再試一次", Snackbar.LENGTH_LONG)
+                val snack = Snackbar.make(binding.root, getString(R.string.login_failed), Snackbar.LENGTH_LONG)
                 snack.show()
             }
         }

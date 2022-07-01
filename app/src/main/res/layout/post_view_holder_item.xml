@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="揪團說明與注意事項"
+            android:text="@string/additional_info"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"

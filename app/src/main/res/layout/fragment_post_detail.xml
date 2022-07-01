@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="主揪"
+                android:text="@string/host"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -149,11 +149,11 @@
                 tools:text="Host Name" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/remark_text"
+                android:id="@+id/additional_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="揪團說明與注意事項"
+                android:text="@string/additional_info"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -169,15 +169,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/remark_text"
+                app:layout_constraintTop_toBottomOf="@id/additional_text"
                 tools:text="先到先打，打二休一(贏或輸)，打完三場分隊(第四場開始，不再對練三顆，上場就發球，換隊伍時盡快上場，就可以多打幾局)木頭地室內場請攜帶室內鞋，請提早5-10分鐘來幫忙架網，謝謝" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/attendees_text"
+                android:id="@+id/number_of_people_need_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="需求人數"
+                android:text="@string/number_of_people_need"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +190,7 @@
                 android:layout_marginTop="20dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/attendees_text"
+                app:layout_constraintStart_toEndOf="@id/number_of_people_need_text"
                 app:layout_constraintTop_toBottomOf="@id/additional_info"
                 tools:text="(3)" />
 
@@ -201,7 +201,7 @@
                 android:layout_marginTop="8dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/attendees_text"
+                app:layout_constraintTop_toBottomOf="@id/number_of_people_need_text"
                 tools:text="已報名1位" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -220,7 +220,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="128dp"
-                android:text="查看已報名"
+                android:text="@string/view_joined"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:textColor="@color/color_secondary_variant"
                 android:textStyle="bold"

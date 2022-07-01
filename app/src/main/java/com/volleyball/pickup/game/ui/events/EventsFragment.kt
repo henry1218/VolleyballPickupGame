@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.FragmentEventsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,8 +30,8 @@ class EventsFragment : Fragment() {
         binding.viewpager.isUserInputEnabled = false
         TabLayoutMediator(binding.tabLayout, binding.viewpager) { tab, position ->
             when (position) {
-                0 -> tab.text = "已報名揪團"
-                1 -> tab.text = "我的揪團"
+                0 -> tab.text = getString(R.string.joined_events)
+                1 -> tab.text = getString(R.string.host_events)
             }
         }.attach()
 

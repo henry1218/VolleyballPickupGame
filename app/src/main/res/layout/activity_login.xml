@@ -10,7 +10,7 @@
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:com_facebook_login_text="使用Facebook登入"
+        app:com_facebook_login_text="@string/login_facebook"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

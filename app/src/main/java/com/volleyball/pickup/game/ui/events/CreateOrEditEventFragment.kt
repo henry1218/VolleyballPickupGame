@@ -22,7 +22,9 @@ import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.FragmentCreateOrEditEventBinding
 import com.volleyball.pickup.game.models.Post
-import com.volleyball.pickup.game.utils.*
+import com.volleyball.pickup.game.utils.CityUtil
+import com.volleyball.pickup.game.utils.NetHeight
+import com.volleyball.pickup.game.utils.ProfileUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,7 +41,7 @@ class CreateOrEditEventFragment : Fragment() {
     private val timeFormatter = SimpleDateFormat("k:mm", Locale.TAIWAN)
     private var startTime: Calendar? = null
     private var endTime: Calendar? = null
-    private var netHeightId = NET_HEIGHT_MAN
+    private var netHeightId = NetHeight.MAN.id
     private lateinit var globalLayoutListener: ViewTreeObserver.OnGlobalLayoutListener
 
     @Inject
@@ -60,23 +62,23 @@ class CreateOrEditEventFragment : Fragment() {
         binding.toolbar.setOnMenuItemClickListener {
             var hasEmptyFiled = false
             if (binding.title.text.isNullOrEmpty()) {
-                binding.titleInputLayout.error = "不能為空"
+                binding.titleInputLayout.error = getString(R.string.required)
                 hasEmptyFiled = true
             }
             if (binding.date.text.isNullOrEmpty()) {
-                binding.dateInputLayout.error = "不能為空"
+                binding.dateInputLayout.error = getString(R.string.required)
                 hasEmptyFiled = true
             }
             if (binding.startTime.text.isNullOrEmpty()) {
-                binding.startTimeInputLayout.error = "不能為空"
+                binding.startTimeInputLayout.error = getString(R.string.required)
                 hasEmptyFiled = true
             }
             if (binding.endTime.text.isNullOrEmpty()) {
-                binding.endTimeInputLayout.error = "不能為空"
+                binding.endTimeInputLayout.error = getString(R.string.required)
                 hasEmptyFiled = true
             }
             if (binding.location.text.isNullOrEmpty()) {
-                binding.locationInputLayout.error = "不能為空"
+                binding.locationInputLayout.error = getString(R.string.required)
                 hasEmptyFiled = true
             }
 
@@ -244,15 +246,15 @@ class CreateOrEditEventFragment : Fragment() {
         binding.rgNetHeight.check(R.id.rb_net_man)
         binding.rgNetHeight.setOnCheckedChangeListener { _, id ->
             netHeightId = when (id) {
-                R.id.rb_net_man -> NET_HEIGHT_MAN
-                R.id.rb_net_woman -> NET_HEIGHT_WOMAN
-                else -> NET_HEIGHT_BETWEEN
+                R.id.rb_net_man -> NetHeight.MAN.id
+                R.id.rb_net_woman -> NetHeight.WOMAN.id
+                else -> throw Exception("Wrong NetHeight id($id)")
             }
         }
 
         if (args.isEdit) {
             viewModel.getTempPostForEdit().let {
-                binding.toolbar.title = "編輯"
+                binding.toolbar.title = getString(R.string.edit)
                 binding.title.setText(it.title)
                 calendar.time = it.startTimestamp.toDate()
                 startTime = Calendar.getInstance().apply { time = it.startTimestamp.toDate() }
@@ -260,14 +262,20 @@ class CreateOrEditEventFragment : Fragment() {
                 binding.date.setText(it.date)
                 binding.startTime.setText(it.startTime)
                 binding.endTime.setText(it.endTime)
+                localitiesAdapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_spinner_dropdown_item,
+                    CityUtil.getLocalities(it.city)
+                )
+                binding.localitySelected.setAdapter(localitiesAdapter)
                 binding.citySelected.setText(it.city, false)
                 binding.localitySelected.setText(it.locality, false)
                 binding.location.setText(it.location)
                 binding.rgNetHeight.check(
                     when (it.netHeight) {
-                        NET_HEIGHT_MAN -> R.id.rb_net_man
-                        NET_HEIGHT_WOMAN -> R.id.rb_net_woman
-                        else -> R.id.rb_net_between
+                        NetHeight.MAN.id -> R.id.rb_net_man
+                        NetHeight.WOMAN.id -> R.id.rb_net_woman
+                        else -> throw Exception("Wrong NetHeight id($id)")
                     }
                 )
                 binding.fee.setText(it.fee.toString())
