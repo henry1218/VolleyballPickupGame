@@ -35,27 +35,30 @@ class MainRepository @Inject constructor() {
     private val postRef by lazy { firestore.collection("posts") }
 
     fun fetchPosts(postsResp: MutableLiveData<List<Post>>) {
-        postRef.orderBy(
-            "startTimestamp",
-            Query.Direction.ASCENDING
-        ).addSnapshotListener { snapshots, e ->
-            if (e != null) {
-                Timber.d("add snapshot error(${e.message}")
-                return@addSnapshotListener
-            }
+        postRef
+            .whereGreaterThanOrEqualTo("endTimestamp", Timestamp.now())
+            .orderBy("endTimestamp", Query.Direction.ASCENDING)
+            .orderBy("startTimestamp", Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Timber.d("add snapshot error(${e.message}")
+                    return@addSnapshotListener
+                }
 
-            if (snapshots == null) {
-                Timber.d("snapshots is null")
-                return@addSnapshotListener
-            }
+                if (snapshots == null) {
+                    Timber.d("snapshots is null")
+                    return@addSnapshotListener
+                }
 
-            val list = snapshots.documents.mapNotNull { it.toObject<Post>() }
-            postsResp.postValue(list)
-        }
+                val list = snapshots.documents.mapNotNull { it.toObject<Post>() }
+                postsResp.postValue(list)
+            }
     }
 
     fun fetchHostEvents(hostEventResp: MutableLiveData<List<Post>>) {
         postRef.whereEqualTo("hostUid", firebaseAuth.uid)
+            .whereGreaterThanOrEqualTo("endTimestamp", Timestamp.now())
+            .orderBy("endTimestamp", Query.Direction.ASCENDING)
             .orderBy(
                 "startTimestamp",
                 Query.Direction.ASCENDING
@@ -77,6 +80,8 @@ class MainRepository @Inject constructor() {
 
     fun fetchSignedUpEvents(signedUpEventResp: MutableLiveData<List<Post>>) {
         postRef.whereArrayContains("players", firebaseAuth.uid.toString())
+            .whereGreaterThanOrEqualTo("endTimestamp", Timestamp.now())
+            .orderBy("endTimestamp", Query.Direction.ASCENDING)
             .orderBy(
                 "startTimestamp",
                 Query.Direction.ASCENDING
