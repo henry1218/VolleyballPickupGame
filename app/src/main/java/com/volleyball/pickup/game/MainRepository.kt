@@ -8,9 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
-import com.volleyball.pickup.game.models.Address
-import com.volleyball.pickup.game.models.Player
-import com.volleyball.pickup.game.models.Post
+import com.volleyball.pickup.game.models.*
 import com.volleyball.pickup.game.utils.ProfileUtils
 import com.volleyball.pickup.game.utils.SingleLiveEvent
 import timber.log.Timber
@@ -117,17 +115,17 @@ class MainRepository @Inject constructor() {
         }
     }
 
-    fun addPost(post: Post) {
+    fun addPost(post: Post, result: MutableLiveData<FirestoreResult>) {
         post.postId = postRef.document().id
         post.hostUid = firebaseAuth.uid.toString()
         postRef.document(post.postId).set(post).addOnSuccessListener {
-            Timber.d("DocumentSnapshot added Success")
+            result.value = FirestoreResult.Success(Operation.ADD)
         }.addOnFailureListener { e ->
-            Timber.w("Error adding document", e)
+            result.value = FirestoreResult.Failure(e.message.toString())
         }
     }
 
-    fun updatePost(post: Post) {
+    fun updatePost(post: Post, result: MutableLiveData<FirestoreResult>) {
         post.hostUid = firebaseAuth.uid.toString()
         postRef.document(post.postId)
             .update(
@@ -150,16 +148,20 @@ class MainRepository @Inject constructor() {
                     "additionalInfo" to post.additionalInfo,
                 )
             )
-            .addOnCanceledListener {
-                //TODO show hint
+            .addOnSuccessListener {
+                result.value = FirestoreResult.Success(Operation.UPDATE)
+            }.addOnFailureListener { e ->
+                result.value = FirestoreResult.Failure(e.message.toString())
             }
     }
 
-    fun deletePost(postId: String) {
+    fun deletePost(postId: String, result: MutableLiveData<FirestoreResult>) {
         postRef.document(postId)
             .delete()
-            .addOnCanceledListener {
-                //TODO show hint
+            .addOnSuccessListener {
+                result.value = FirestoreResult.Success(Operation.DELETE)
+            }.addOnFailureListener { e ->
+                result.value = FirestoreResult.Failure(e.message.toString())
             }
     }
 
@@ -169,7 +171,7 @@ class MainRepository @Inject constructor() {
         tempPostForEdit = post
     }
 
-    fun updateEventState(post: Post) {
+    fun updateEventState(post: Post, result: MutableLiveData<FirestoreResult>) {
         val playersDocument = postRef.document(post.postId)
             .collection("players")
             .document(firebaseAuth.uid.toString())
@@ -179,8 +181,12 @@ class MainRepository @Inject constructor() {
                     postRef.document(post.postId)
                         .update("players", FieldValue.arrayRemove(firebaseAuth.uid.toString()))
                         .addOnSuccessListener {
-                            //TODO show hint
+                            result.value = FirestoreResult.Success(Operation.UNREGISTER)
+                        }.addOnFailureListener { e ->
+                            result.value = FirestoreResult.Failure(e.message.toString())
                         }
+                }.addOnFailureListener { e ->
+                    result.value = FirestoreResult.Failure(e.message.toString())
                 }
         } else {
             playersDocument.set(
@@ -194,9 +200,13 @@ class MainRepository @Inject constructor() {
                 postRef.document(post.postId)
                     .update(
                         "players", FieldValue.arrayUnion(firebaseAuth.uid.toString())
-                    ).addOnSuccessListener() {
-                        //TODO show hint
+                    ).addOnSuccessListener {
+                        result.value = FirestoreResult.Success(Operation.REGISTER)
+                    }.addOnFailureListener { e ->
+                        result.value = FirestoreResult.Failure(e.message.toString())
                     }
+            }.addOnFailureListener { e ->
+                result.value = FirestoreResult.Failure(e.message.toString())
             }
         }
     }

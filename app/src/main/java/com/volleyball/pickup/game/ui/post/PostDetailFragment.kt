@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.volleyball.pickup.game.MainViewModel
 import com.volleyball.pickup.game.R
 import com.volleyball.pickup.game.databinding.FragmentPostDetailBinding
+import com.volleyball.pickup.game.models.FirestoreResult
 import com.volleyball.pickup.game.ui.widgets.AvatarView
 import com.volleyball.pickup.game.utils.NetHeight
 import com.volleyball.pickup.game.utils.gone
@@ -60,6 +61,11 @@ class PostDetailFragment : Fragment() {
         viewModel.setBottomNavVisible(false)
         viewModel.fetchPostDetail(args.postId)
         viewModel.postDetail.observe(viewLifecycleOwner) {
+            if (it == null) {
+                viewModel.updateFirestoreResult(FirestoreResult.Failure(getString(R.string.event_not_exist)))
+                findNavController().popBackStack()
+                return@observe
+            }
             binding.fabSignedUpEvent.isEnabled = true
             binding.toolbar.title = it.title
             binding.cvAvatar.setContent {

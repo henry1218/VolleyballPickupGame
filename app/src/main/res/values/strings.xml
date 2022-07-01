@@ -37,4 +37,11 @@
     <string name="signed_up_events">已報名揪團</string>
     <string name="host_events">我的揪團</string>
     <string name="delete">刪除</string>
+    <string name="add">新增</string>
+    <string name="add_success">新增成功</string>
+    <string name="edit_success">編輯成功</string>
+    <string name="delete_success">刪除成功</string>
+    <string name="register_success">+1成功</string>
+    <string name="unregister_success">-1成功</string>
+    <string name="event_not_exist">揪團已被刪除</string>
 </resources>

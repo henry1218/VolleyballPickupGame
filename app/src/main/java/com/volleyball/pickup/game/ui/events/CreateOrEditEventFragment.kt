@@ -112,7 +112,6 @@ class CreateOrEditEventFragment : Fragment() {
                     } else {
                         viewModel.addPost(post)
                     }
-                    findNavController().popBackStack()
                     true
                 }
                 else -> false

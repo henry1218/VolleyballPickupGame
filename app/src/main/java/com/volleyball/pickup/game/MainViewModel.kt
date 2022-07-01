@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.volleyball.pickup.game.models.Address
+import com.volleyball.pickup.game.models.FirestoreResult
 import com.volleyball.pickup.game.models.Post
 import com.volleyball.pickup.game.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,9 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
     private val _postDetail = SingleLiveEvent<Post>()
     val postDetail: SingleLiveEvent<Post> = _postDetail
+
+    private val _firestoreResult = MutableLiveData<FirestoreResult>()
+    val firestoreResult: LiveData<FirestoreResult> = _firestoreResult
 
     fun fetchPosts() {
         if (_postList.value == null) {
@@ -57,16 +61,16 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     }
 
     fun addPost(post: Post) {
-        repository.addPost(post)
+        repository.addPost(post, _firestoreResult)
     }
 
     fun updatePost(post: Post) {
         post.postId = getTempPostForEdit().postId
-        repository.updatePost(post)
+        repository.updatePost(post, _firestoreResult)
     }
 
     fun deletePost(postId: String) {
-        repository.deletePost(postId)
+        repository.deletePost(postId, _firestoreResult)
     }
 
     fun getTempPostForEdit(): Post = repository.getTempPost()
@@ -85,8 +89,12 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
     fun updateEventStatus() {
         postDetail.value?.let {
-            repository.updateEventState(it)
+            repository.updateEventState(it, _firestoreResult)
         }
+    }
+
+    fun updateFirestoreResult(result: FirestoreResult) {
+        _firestoreResult.value = result
     }
 
     fun getUid(): String {
