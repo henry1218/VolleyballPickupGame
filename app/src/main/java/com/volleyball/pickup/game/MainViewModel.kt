@@ -3,7 +3,7 @@ package com.volleyball.pickup.game
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.volleyball.pickup.game.models.Address
+import com.volleyball.pickup.game.models.Location
 import com.volleyball.pickup.game.models.FirestoreResult
 import com.volleyball.pickup.game.models.Post
 import com.volleyball.pickup.game.utils.SingleLiveEvent
@@ -56,8 +56,12 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         _bottomNavVisible.value = visible
     }
 
-    fun getAddress(): Address {
-        return repository.address
+    fun updateLocation(location: Location) {
+        repository.updateLocation(location)
+    }
+
+    fun getLocation(): Location {
+        return repository.getLocation()
     }
 
     fun addPost(post: Post) {

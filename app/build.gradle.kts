@@ -77,6 +77,8 @@ dependencies {
     implementation(Config.Compose.coil)
     implementation(Config.Libs.timber)
     implementation(Config.AndroidX.viewpager2)
+    implementation(Config.AndroidX.viewpager2)
+    implementation(Config.Libs.playServicesLocation)
 
     testImplementation(Config.Test.jUnit)
     androidTestImplementation(Config.Test.jUnitExt)

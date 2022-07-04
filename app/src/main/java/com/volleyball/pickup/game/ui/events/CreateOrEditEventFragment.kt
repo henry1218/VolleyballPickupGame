@@ -210,7 +210,7 @@ class CreateOrEditEventFragment : Fragment() {
             CityUtil.getAllCity()
         )
 
-        val localitiesList = CityUtil.getLocalities(viewModel.getAddress().city)
+        val localitiesList = CityUtil.getLocalities(viewModel.getLocation().city)
         var localitiesAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
@@ -219,7 +219,7 @@ class CreateOrEditEventFragment : Fragment() {
         binding.citySelected.apply {
             setAdapter(cityAdapter)
             setText(
-                cityAdapter.getItem(CityUtil.getIndexOfCity(viewModel.getAddress().city)),
+                cityAdapter.getItem(CityUtil.getIndexOfCity(viewModel.getLocation().city)),
                 false
             )
             setOnItemClickListener { _, _, position, _ ->
@@ -236,7 +236,7 @@ class CreateOrEditEventFragment : Fragment() {
             setAdapter(localitiesAdapter)
             setText(
                 localitiesAdapter.getItem(
-                    CityUtil.getIndexOfLocality(viewModel.getAddress().locality, localitiesList)
+                    CityUtil.getIndexOfLocality(viewModel.getLocation().locality, localitiesList)
                 ),
                 false
             )

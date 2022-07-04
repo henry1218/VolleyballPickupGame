@@ -42,6 +42,7 @@ object Config {
         const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.42"
         const val googleServices = "com.google.gms:google-services:4.3.12"
         const val timber = "com.jakewharton.timber:timber:5.0.1"
+        const val playServicesLocation = "com.google.android.gms:play-services-location:20.0.0"
 
         object Firebase {
             const val bom = "com.google.firebase:firebase-bom:30.0.2"

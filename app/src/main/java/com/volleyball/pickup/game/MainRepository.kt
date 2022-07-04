@@ -15,7 +15,6 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class MainRepository @Inject constructor() {
-    var address = Address()
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -29,6 +28,8 @@ class MainRepository @Inject constructor() {
     private var tempPostForEdit = Post()
 
     private lateinit var postDetailRegistration: ListenerRegistration
+
+    private var location = Location()
 
     private val postRef by lazy { firestore.collection("posts") }
 
@@ -222,4 +223,10 @@ class MainRepository @Inject constructor() {
     fun getUid(): String {
         return firebaseAuth.uid.toString()
     }
+
+    fun updateLocation(location: Location) {
+        this.location = location
+    }
+
+    fun getLocation(): Location = location
 }
