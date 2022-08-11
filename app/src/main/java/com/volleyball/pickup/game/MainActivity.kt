@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         if (hasLocationPermission()) {
             requestLocationUpdate()
             // test
+            // test2
         } else {
             val locationPermissionRequest = registerForActivityResult(
                 ActivityResultContracts.RequestMultiplePermissions()
